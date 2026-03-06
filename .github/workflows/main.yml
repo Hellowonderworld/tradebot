@@ -1,0 +1,28 @@
+name: QuantBot_Daily_Run
+
+on:
+  schedule:
+    # 台灣時間 13:40 執行 (UTC 05:40)
+    - cron: '40 5 * * 1-5'
+  workflow_dispatch: # 允許你隨時手動點擊執行測試
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Bot
+        env:
+          LINE_ACCESS_TOKEN: ${{ secrets.LINE_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python bot.py
