@@ -1,7 +1,7 @@
 import os, yfinance as yf, pandas as pd, requests, time, csv
 from datetime import datetime
 
-CAPITAL = 16000
+CAPITAL = 10000000
 RISK_PCT = 0.05
 
 class DualExpert:
@@ -68,3 +68,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
